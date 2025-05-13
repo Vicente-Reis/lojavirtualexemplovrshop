@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>V R SHOP - Sua Loja de Tecnologia</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6; /* Fundo cinza claro */
+        }
+        .hero-bg {
+            background: linear-gradient(to right, #6366f1, #8b5cf6); /* Gradiente roxo/azul */
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .section-title {
+            border-bottom: 3px solid #6366f1; /* Linha roxa abaixo do título da seção */
+            padding-bottom: 8px;
+            display: inline-block;
+        }
+        .btn-primary {
+            background-color: #6366f1;
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #4f46e5;
+        }
+        .btn-secondary {
+            background-color: #f97316; /* Laranja para destaque */
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+        .btn-secondary:hover {
+            background-color: #ea580c;
+        }
+        .aliexpress-banner {
+            background-color: #ff4747; /* Vermelho característico do Aliexpress */
+        }
+        .footer-bg {
+            background-color: #1f2937; /* Cinza escuro para o rodapé */
+        }
+        /* Animação de entrada suave para os cards */
+        .card-enter {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: cardEnter 0.5s forwards;
+        }
+        @keyframes cardEnter {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        /* Estilo para o carrossel de banners (placeholder) */
+        .carousel-container {
+            overflow: hidden;
+            position: relative;
+            border-radius: 0.5rem; /* bordas arredondadas */
+        }
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .carousel-slide {
+            min-width: 100%;
+            box-sizing: border-box;
+        }
+        .carousel-slide img {
+            width: 100%;
+            height: auto;
+            max-height: 500px; /* Altura máxima para o banner */
+            object-fit: cover;
+            border-radius: 0.5rem;
+        }
+        .carousel-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0,0,0,0.5);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            z-index: 10;
+            border-radius: 0.375rem;
+        }
+        .carousel-button.prev {
+            left: 1rem;
+        }
+        .carousel-button.next {
+            right: 1rem;
+        }
+        /* Indicadores do carrossel */
+        .carousel-indicators {
+            position: absolute;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.5rem;
+        }
+        .carousel-indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: rgba(255,255,255,0.5);
+            cursor: pointer;
+        }
+        .carousel-indicator.active {
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex flex-wrap justify-between items-center">
+            <a href="#" class="text-3xl font-bold text-indigo-600">
+                V R <span class="text-purple-600">SHOP</span>
+            </a>
+            <nav class="mt-4 md:mt-0">
+                <ul class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-6 items-center">
+                    <li><a href="#smartphones" class="text-gray-600 hover:text-indigo-600 transition duration-300">Smartphones</a></li>
+                    <li><a href="#smartwatches" class="text-gray-600 hover:text-indigo-600 transition duration-300">Smartwatches</a></li>
+                    <li><a href="#smarttvs" class="text-gray-600 hover:text-indigo-600 transition duration-300">Smart TVs</a></li>
+                    <li><a href="#notebooks" class="text-gray-600 hover:text-indigo-600 transition duration-300">Notebooks</a></li>
+                    <li><a href="#eletrodomesticos" class="text-gray-600 hover:text-indigo-600 transition duration-300">Eletrodomésticos</a></li>
+                    <li><a href="#eletroportateis" class="text-gray-600 hover:text-indigo-600 transition duration-300">Eletroportáteis</a></li>
+                    <li><a href="#arventilacao" class="text-gray-600 hover:text-indigo-600 transition duration-300">Ar & Ventilação</a></li>
+                    <li><a href="#ofertas" class="text-orange-500 font-semibold hover:text-orange-600 transition duration-300"><i class="fas fa-tags mr-1"></i>Ofertas</a></li>
+                </ul>
+            </nav>
+            <div class="mt-4 md:mt-0 flex items-center space-x-3">
+                <button class="text-gray-600 hover:text-indigo-600 transition duration-300">
+                    <i class="fas fa-search text-xl"></i>
+                </button>
+                <button class="text-gray-600 hover:text-indigo-600 transition duration-300">
+                    <i class="fas fa-shopping-cart text-xl"></i>
+                </button>
+                <button class="text-gray-600 hover:text-indigo-600 transition duration-300">
+                    <i class="fas fa-user-circle text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero-bg text-white py-10 md:py-20">
+        <div class="container mx-auto px-4 text-center">
+            <div class="carousel-container shadow-lg">
+                <div class="carousel-track">
+                    <div class="carousel-slide">
+                        <img src="https://placehold.co/1200x500/6366f1/FFFFFF?text=Promo%C3%A7%C3%A3o+Imperd%C3%ADvel+Smartphones" alt="[Banner de Promoção de Smartphones]">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="https://placehold.co/1200x500/8b5cf6/FFFFFF?text=Novos+Notebooks+Chegaram!" alt="[Banner de Novos Notebooks]">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="https://placehold.co/1200x500/ec4899/FFFFFF?text=Smart+TVs+com+Desconto" alt="[Banner de Smart TVs com Desconto]">
+                    </div>
+                </div>
+                <button class="carousel-button prev"><i class="fas fa-chevron-left"></i></button>
+                <button class="carousel-button next"><i class="fas fa-chevron-right"></i></button>
+                <div class="carousel-indicators"></div>
+            </div>
+             <h1 class="text-4xl md:text-5xl font-bold mt-8 mb-4">Bem-vindo à V R SHOP!</h1>
+            <p class="text-lg md:text-xl mb-8">A sua loja completa de produtos de tecnologia com os melhores preços.</p>
+            <a href="#produtos" class="btn-primary py-3 px-8 rounded-lg text-lg font-semibold">Ver Produtos</a>
+        </div>
+    </section>
+
+    <section id="ofertas" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-2 section-title text-gray-800">
+                <i class="fas fa-tags mr-2 text-orange-500"></i>OFERTAS & CUPONS
+            </h2>
+            <p class="text-center text-gray-600 mb-12">Aproveite nossos descontos exclusivos e cupons para economizar!</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-gray-50 p-6 rounded-lg shadow-lg card-hover card-enter transition-all duration-300" style="animation-delay: 0.1s;">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-xl font-semibold text-indigo-600">CUPOM 10% OFF</h3>
+                        <span class="bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full">TEC10</span>
+                    </div>
+                    <p class="text-gray-700 mb-4">Use o cupom <strong class="text-orange-500">TEC10</strong> e ganhe 10% de desconto em notebooks selecionados.</p>
+                    <button class="w-full btn-secondary py-2 px-4 rounded-lg font-semibold">Ver Notebooks</button>
+                </div>
+                <div class="bg-gray-50 p-6 rounded-lg shadow-lg card-hover card-enter transition-all duration-300" style="animation-delay: 0.2s;">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-xl font-semibold text-indigo-600">FRETE GRÁTIS</h3>
+                         <span class="bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full">IMPERDÍVEL</span>
+                    </div>
+                    <p class="text-gray-700 mb-4">Frete grátis para todo o Brasil em compras acima de R$299 em Smart TVs.</p>
+                    <button class="w-full btn-secondary py-2 px-4 rounded-lg font-semibold">Ver Smart TVs</button>
+                </div>
+                <div class="bg-gray-50 p-6 rounded-lg shadow-lg card-hover card-enter transition-all duration-300" style="animation-delay: 0.3s;">
+                    <div class="flex items-center justify-between mb-4">
+                         <h3 class="text-xl font-semibold text-indigo-600">SMARTWATCH EM PROMO</h3>
+                        <span class="bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full">ATÉ 30% OFF</span>
+                    </div>
+                    <p class="text-gray-700 mb-4">Smartwatches com até 30% de desconto. Monitore sua saúde com estilo!</p>
+                    <button class="w-full btn-secondary py-2 px-4 rounded-lg font-semibold">Ver Smartwatches</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="produtos" class="py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 section-title text-gray-800">Nossos Produtos</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                <div id="smartphones" class="bg-white p-6 rounded-lg shadow-lg text-center card-hover card-enter transition-all duration-300" style="animation-delay: 0.1s;">
+                    <img src="https://placehold.co/300x200/a78bfa/FFFFFF?text=Smartphones" alt="[Imagem de Smartphones]" class="w-full h-40 object-contain mb-4 rounded">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Smartphones</h3>
+                    <p class="text-gray-600 text-sm mb-4">Os últimos lançamentos e as melhores marcas.</p>
+                    <a href="#" class="btn-primary py-2 px-6 rounded-lg font-semibold text-sm">Ver Todos</a>
+                </div>
+                <div id="smartwatches" class="bg-white p-6 rounded-lg shadow-lg text-center card-hover card-enter transition-all duration-300" style="animation-delay: 0.2s;">
+                    <img src="https://placehold.co/300x200/818cf8/FFFFFF?text=Smartwatches" alt="[Imagem de Smartwatches]" class="w-full h-40 object-contain mb-4 rounded">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Smartwatches</h3>
+                    <p class="text-gray-600 text-sm mb-4">Tecnologia e estilo no seu pulso.</p>
+                    <a href="#" class="btn-primary py-2 px-6 rounded-lg font-semibold text-sm">Ver Todos</a>
+                </div>
+                <div id="smarttvs" class="bg-white p-6 rounded-lg shadow-lg text-center card-hover card-enter transition-all duration-300" style="animation-delay: 0.3s;">
+                    <img src="https://placehold.co/300x200/f472b6/FFFFFF?text=Smart+TVs" alt="[Imagem de Smart TVs]" class="w-full h-40 object-contain mb-4 rounded">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Smart TVs</h3>
+                    <p class="text-gray-600 text-sm mb-4">Entretenimento de alta definição para sua casa.</p>
+                    <a href="#" class="btn-primary py-2 px-6 rounded-lg font-semibold text-sm">Ver Todos</a>
+                </div>
+                <div id="notebooks" class="bg-white p-6 rounded-lg shadow-lg text-center card-hover card-enter transition-all duration-300" style="animation-delay: 0.4s;">
+                    <img src="https://placehold.co/300x200/38bdf8/FFFFFF?text=Notebooks" alt="[Imagem de Notebooks]" class="w-full h-40 object-contain mb-4 rounded">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Notebooks</h3>
+                    <p class="text-gray-600 text-sm mb-4">Potência e portabilidade para trabalho e lazer.</p>
+                    <a href="#" class="btn-primary py-2 px-6 rounded-lg font-semibold text-sm">Ver Todos</a>
+                </div>
+                <div id="eletrodomesticos" class="bg-white p-6 rounded-lg shadow-lg text-center card-hover card-enter transition-all duration-300" style="animation-delay: 0.5s;">
+                    <img src="https://placehold.co/300x200/34d399/FFFFFF?text=Eletrodom%C3%A9sticos" alt="[Imagem de Eletrodomésticos]" class="w-full h-40 object-contain mb-4 rounded">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Eletrodomésticos</h3>
+                    <p class="text-gray-600 text-sm mb-4">Inovação e praticidade para seu lar.</p>
+                    <a href="#" class="btn-primary py-2 px-6 rounded-lg font-semibold text-sm">Ver Todos</a>
+                </div>
+                <div id="eletroportateis" class="bg-white p-6 rounded-lg shadow-lg text-center card-hover card-enter transition-all duration-300" style="animation-delay: 0.6s;">
+                    <img src="https://placehold.co/300x200/fbbf24/FFFFFF?text=Eletroport%C3%A1teis" alt="[Imagem de Eletroportáteis]" class="w-full h-40 object-contain mb-4 rounded">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Eletroportáteis</h3>
+                    <p class="text-gray-600 text-sm mb-4">Facilite seu dia a dia com tecnologia.</p>
+                    <a href="#" class="btn-primary py-2 px-6 rounded-lg font-semibold text-sm">Ver Todos</a>
+                </div>
+                <div id="arventilacao" class="bg-white p-6 rounded-lg shadow-lg text-center card-hover card-enter transition-all duration-300" style="animation-delay: 0.7s;">
+                    <img src="https://placehold.co/300x200/60a5fa/FFFFFF?text=Ar+%26+Ventila%C3%A7%C3%A3o" alt="[Imagem de Ar e Ventilação]" class="w-full h-40 object-contain mb-4 rounded">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Ar & Ventilação</h3>
+                    <p class="text-gray-600 text-sm mb-4">Conforto térmico para todos os ambientes.</p>
+                    <a href="#" class="btn-primary py-2 px-6 rounded-lg font-semibold text-sm">Ver Todos</a>
+                </div>
+                 <div class="bg-white p-6 rounded-lg shadow-lg text-center card-hover card-enter transition-all duration-300" style="animation-delay: 0.8s;">
+                    <img src="https://placehold.co/300x200/c084fc/FFFFFF?text=Acess%C3%B3rios+Tech" alt="[Imagem de Acessórios Tech]" class="w-full h-40 object-contain mb-4 rounded">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Acessórios Tech</h3>
+                    <p class="text-gray-600 text-sm mb-4">Fones, capas, carregadores e muito mais.</p>
+                    <a href="#" class="btn-primary py-2 px-6 rounded-lg font-semibold text-sm">Ver Todos</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 aliexpress-banner text-white">
+        <div class="container mx-auto px-4 text-center">
+            <i class="fab fa-aliexpress text-6xl mb-6"></i>
+            <h2 class="text-4xl font-bold mb-4">Produtos Importados <span class="font-normal">do</span> Aliexpress</h2>
+            <p class="text-lg md:text-xl mb-8">Descubra novidades e produtos exclusivos diretamente de fornecedores internacionais com preços incríveis!</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+                <div class="bg-white text-gray-800 p-4 rounded-lg shadow-lg card-hover card-enter transition-all duration-300" style="animation-delay: 0.1s;">
+                    <img src="https://placehold.co/300x200/ef4444/FFFFFF?text=Gadget+Inovador" alt="[Imagem de Gadget Inovador do Aliexpress]" class="w-full h-40 object-contain mb-3 rounded">
+                    <h4 class="font-semibold">Gadget Inovador X</h4>
+                    <p class="text-sm text-gray-600">Super útil para o dia a dia.</p>
+                    <p class="text-red-600 font-bold mt-2">A partir de R$ 49,90</p>
+                </div>
+                 <div class="bg-white text-gray-800 p-4 rounded-lg shadow-lg card-hover card-enter transition-all duration-300" style="animation-delay: 0.2s;">
+                    <img src="https://placehold.co/300x200/f97316/FFFFFF?text=Mini+Projetor+Port%C3%A1til" alt="[Imagem de Mini Projetor Portátil do Aliexpress]" class="w-full h-40 object-contain mb-3 rounded">
+                    <h4 class="font-semibold">Mini Projetor HD</h4>
+                    <p class="text-sm text-gray-600">Cinema em qualquer lugar.</p>
+                    <p class="text-red-600 font-bold mt-2">A partir de R$ 199,00</p>
+                </div>
+                <div class="bg-white text-gray-800 p-4 rounded-lg shadow-lg card-hover card-enter transition-all duration-300" style="animation-delay: 0.3s;">
+                    <img src="https://placehold.co/300x200/facc15/FFFFFF?text=Fone+Bluetooth+TWS" alt="[Imagem de Fone Bluetooth TWS do Aliexpress]" class="w-full h-40 object-contain mb-3 rounded">
+                    <h4 class="font-semibold">Fone TWS Pro</h4>
+                    <p class="text-sm text-gray-600">Qualidade de som superior.</p>
+                    <p class="text-red-600 font-bold mt-2">A partir de R$ 79,90</p>
+                </div>
+                 <div class="bg-white text-gray-800 p-4 rounded-lg shadow-lg card-hover card-enter transition-all duration-300" style="animation-delay: 0.4s;">
+                    <img src="https://placehold.co/300x200/4ade80/FFFFFF?text=C%C3%A2mera+de+Seguran%C3%A7a+Wi-Fi" alt="[Imagem de Câmera de Segurança Wi-Fi do Aliexpress]" class="w-full h-40 object-contain mb-3 rounded">
+                    <h4 class="font-semibold">Câmera Wi-Fi 360°</h4>
+                    <p class="text-sm text-gray-600">Monitore sua casa remotamente.</p>
+                    <p class="text-red-600 font-bold mt-2">A partir de R$ 129,00</p>
+                </div>
+            </div>
+            <a href="#" class="btn-primary bg-white text-red-600 hover:bg-gray-100 py-3 px-8 rounded-lg text-lg font-semibold">
+                Ver Mais no Aliexpress <i class="fas fa-external-link-alt ml-2"></i>
+            </a>
+        </div>
+    </section>
+
+    <section class="bg-indigo-700 py-16">
+        <div class="container mx-auto px-4 text-center text-white">
+            <h2 class="text-3xl font-bold mb-4">Fique por Dentro das Novidades!</h2>
+            <p class="text-lg mb-8">Cadastre seu e-mail e receba ofertas exclusivas, lançamentos e cupons de desconto.</p>
+            <form class="max-w-md mx-auto flex flex-col sm:flex-row gap-4">
+                <input type="email" placeholder="Seu melhor e-mail" class="flex-grow p-3 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-purple-400" required>
+                <button type="submit" class="btn-secondary py-3 px-6 rounded-lg font-semibold">Cadastrar</button>
+            </form>
+        </div>
+    </section>
+
+    <footer class="footer-bg text-gray-300 py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <h4 class="text-xl font-semibold text-white mb-4">V R SHOP</h4>
+                    <p class="text-sm">Sua paixão por tecnologia começa aqui. Oferecemos os melhores produtos com preços imbatíveis e atendimento de qualidade.</p>
+                </div>
+                <div>
+                    <h4 class="text-xl font-semibold text-white mb-4">Links Úteis</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-indigo-400 transition duration-300">Sobre Nós</a></li>
+                        <li><a href="#" class="hover:text-indigo-400 transition duration-300">Política de Privacidade</a></li>
+                        <li><a href="#" class="hover:text-indigo-400 transition duration-300">Termos de Serviço</a></li>
+                        <li><a href="#" class="hover:text-indigo-400 transition duration-300">Contato</a></li>
+                        <li><a href="#" class="hover:text-indigo-400 transition duration-300">Trabalhe Conosco</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-xl font-semibold text-white mb-4">Siga-nos</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-300 hover:text-indigo-400 transition duration-300"><i class="fab fa-facebook-f text-2xl"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-indigo-400 transition duration-300"><i class="fab fa-instagram text-2xl"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-indigo-400 transition duration-300"><i class="fab fa-twitter text-2xl"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-indigo-400 transition duration-300"><i class="fab fa-youtube text-2xl"></i></a>
+                    </div>
+                     <h4 class="text-xl font-semibold text-white mt-6 mb-4">Formas de Pagamento</h4>
+                     <div class="flex items-center space-x-2">
+                        <i class="fab fa-cc-visa text-3xl text-white"></i>
+                        <i class="fab fa-cc-mastercard text-3xl text-white"></i>
+                        <i class="fab fa-cc-paypal text-3xl text-white"></i>
+                        <i class="fas fa-barcode text-3xl text-white" title="Boleto Bancário"></i>
+                        <img src="https://placehold.co/40x25/FFFFFF/000000?text=PIX" alt="[Ícone do PIX]" class="h-6" title="PIX">
+                     </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 pt-8 text-center text-sm">
+                <p>&copy; <span id="currentYear"></span> V R SHOP. Todos os direitos reservados.</p>
+                <p>CNPJ: XX.XXX.XXX/0001-XX | Endereço: Rua Exemplo, 123, Cidade, Estado</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Script para o ano atual no rodapé
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Script básico para o carrossel de banners
+        const track = document.querySelector('.carousel-track');
+        const slides = Array.from(track.children);
+        const nextButton = document.querySelector('.carousel-button.next');
+        const prevButton = document.querySelector('.carousel-button.prev');
+        const indicatorsContainer = document.querySelector('.carousel-indicators');
+        const slideWidth = slides[0].getBoundingClientRect().width;
+        let currentIndex = 0;
+        let autoSlideInterval;
+
+        // Criar indicadores
+        slides.forEach((_, index) => {
+            const button = document.createElement('button');
+            button.classList.add('carousel-indicator');
+            if (index === 0) button.classList.add('active');
+            button.addEventListener('click', () => {
+                moveToSlide(index);
+                resetAutoSlide();
+            });
+            indicatorsContainer.appendChild(button);
+        });
+        const indicators = Array.from(indicatorsContainer.children);
+
+        // Atualizar indicadores
+        const updateIndicators = (targetIndex) => {
+            indicators.forEach((indicator, index) => {
+                indicator.classList.toggle('active', index === targetIndex);
+            });
+        };
+
+        // Mover para o slide
+        const moveToSlide = (targetIndex) => {
+            if (targetIndex < 0) targetIndex = slides.length - 1;
+            if (targetIndex >= slides.length) targetIndex = 0;
+            
+            track.style.transform = 'translateX(-' + slideWidth * targetIndex + 'px)';
+            currentIndex = targetIndex;
+            updateIndicators(currentIndex);
+        };
+
+        // Botões de navegação
+        nextButton.addEventListener('click', () => {
+            moveToSlide(currentIndex + 1);
+            resetAutoSlide();
+        });
+
+        prevButton.addEventListener('click', () => {
+            moveToSlide(currentIndex - 1);
+            resetAutoSlide();
+        });
+        
+        // Slide automático
+        const startAutoSlide = () => {
+            autoSlideInterval = setInterval(() => {
+                moveToSlide(currentIndex + 1);
+            }, 5000); // Mudar slide a cada 5 segundos
+        };
+
+        const resetAutoSlide = () => {
+            clearInterval(autoSlideInterval);
+            startAutoSlide();
+        };
+
+        // Responsividade do carrossel
+        window.addEventListener('resize', () => {
+            const newSlideWidth = slides[0].getBoundingClientRect().width;
+            track.style.transition = 'none'; // Desabilitar transição durante o redimensionamento
+            track.style.transform = 'translateX(-' + newSlideWidth * currentIndex + 'px)';
+            setTimeout(() => {
+                 track.style.transition = 'transform 0.5s ease-in-out'; // Reabilitar transição
+            }, 50);
+        });
+
+
+        // Animação de entrada dos cards ao rolar a página
+        const animatedCards = document.querySelectorAll('.card-enter');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                    observer.unobserve(entry.target); // Animar apenas uma vez
+                }
+            });
+        }, { threshold: 0.1 }); // Disparar quando 10% do card estiver visível
+
+        animatedCards.forEach(card => {
+            card.style.animationPlayState = 'paused'; // Iniciar pausado
+            observer.observe(card);
+        });
+        
+        // Iniciar slide automático
+        startAutoSlide();
+    </script>
+</body>
+</html>
